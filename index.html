@@ -422,7 +422,7 @@
         // Share button
         shareButton.addEventListener('click', () => {
             const score = calculateScore();
-            const text = `I just completed the Octra Memory Challenge! My score: ${score}. Can you beat me? Play now: https://octra-memory-card.vercel.app/ . Made by @bytrizz404 `;
+            const text = `I just completed the Soundness Memory Challenge! My score: ${score}. Can you beat me? Play now: https://soundness-memory-card-game.vercel.app/. Made by @bytrizz404 `;
             const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
             const shareWin = window.open(url, '_blank', 'noopener,noreferrer');
             if (shareWin) { shareWin.opener = null; }
@@ -601,6 +601,7 @@
     </script>
 </body>
 </html>
+
 
 
 
