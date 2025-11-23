@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* Removed animated background overlay */
+       
 
         .container {
             position: relative;
@@ -30,7 +30,7 @@
             max-width: 520px;
             padding: 15px;
         }
-        /* Start Screen */
+        
         .start-screen, .game-screen, .result-screen {
             background: #ffffff;
             border-radius: 20px;
@@ -94,7 +94,7 @@
             transform: translateY(0);
         }
 
-        /* Game Screen */
+        
         .game-header {
             display: flex;
             justify-content: space-between;
@@ -123,7 +123,7 @@
             color: #0045ff;
         }
 
-        /* Memory Grid */
+        
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -189,7 +189,7 @@
             pointer-events: none;
         }
 
-        /* Result Screen */
+       
         .result-screen h2 {
             color: #0045ff;
             font-size: 2em;
@@ -215,7 +215,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 219, 0.35);
         }
 
-        /* Floating Music Toggle */
+       
         .music-toggle {
             position: fixed;
             right: 20px;
@@ -245,7 +245,7 @@
             transform: translateY(0);
         }
 
-        /* Responsive Design */
+        
         @media (max-width: 600px) {
             h1 {
                 font-size: 2em;
@@ -285,7 +285,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Start Screen -->
+        
         <div id="startScreen" class="start-screen">
             <h1>Soundness Memory Challenge</h1>
             <p class="subtitle">Test your memory and beat the clock!</p>
@@ -294,7 +294,7 @@
             <p>Made by <a href="https://x.com/bytrizz404" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #0045ff;"><strong>Bytrizz</strong></a></p>
         </div>
 
-        <!-- Game Screen -->
+       
         <div id="gameScreen" class="game-screen hidden">
             <div class="game-header">
                 <div class="stat">
@@ -312,10 +312,10 @@
             </div>
             <div class="memory-grid" id="memoryGrid"></div>
             <button id="restartButton" type="button">Restart Game</button>
-            <!--<p>Made by <a href="https://x.com/bytrizz404" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1e00ff;"><strong>Bytrizz</strong></a></p>-->
+            
             </div>
 
-        <!-- Result Screen -->
+        
         <div id="resultScreen" class="result-screen hidden">
             <h2>Congratulations!</h2>
             <p class="result-stat"><strong>Player:</strong> <span id="finalName">-</span></p>
@@ -331,7 +331,7 @@
 
     <audio id="bgMusic" src="audio/bg.mp3" preload="auto" loop></audio>
     <script>
-        // Embedded from images.js
+       
         const IMAGES = [
           { id: 'img1', src: 'images/img1.jpg', alt: 'Image 1' },
           { id: 'img2', src: 'images/img2.jpg', alt: 'Image 2' },
@@ -354,7 +354,7 @@
         ];
     </script>
     <script>
-        // Game state
+       
         let playerName = '';
         let flippedCards = [];
         let matchedPairs = 0;
@@ -363,11 +363,11 @@
         let timerInterval = null;
         let canFlip = true;
 
-        // Use all images from external file (8 images -> 16 cards)
+       
         const images = (typeof IMAGES !== "undefined") ? IMAGES : [];
 
 
-        // DOM elements
+       
         const startScreen = document.getElementById('startScreen');
         const gameScreen = document.getElementById('gameScreen');
         const resultScreen = document.getElementById('resultScreen');
@@ -385,7 +385,7 @@
         let musicEnabled = true;
         if (bgMusic) { bgMusic.volume = 0.35; }
 
-        // Start game
+       
         startButton.addEventListener('click', () => {
             playerName = playerNameInput.value.trim();
             if (!playerName) {
@@ -398,19 +398,19 @@
             }
         });
 
-        // Allow Enter key to start
+      
         playerNameInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 startButton.click();
             }
         });
 
-        // Restart button
+       
         restartButton.addEventListener('click', () => {
             resetGame();
         });
 
-        // Music toggle (optional button)
+       
         if (musicToggle) {
             musicToggle.addEventListener('click', () => {
                 musicEnabled = !musicEnabled;
@@ -424,12 +424,12 @@
             });
         }
 
-        // Play again button
+       
         playAgainButton.addEventListener('click', () => {
             showStartScreen();
         });
 
-        // Share button
+      
         shareButton.addEventListener('click', () => {
             const score = calculateScore();
             const text = `I just completed the Soundness Memory Challenge! My score: ${score}. Can you beat me? Play now: https://soundness-memory-card-game.vercel.app/. `;
@@ -438,7 +438,7 @@
             if (shareWin) { shareWin.opener = null; }
         });
 
-        // Show game screen
+       
         function showGameScreen() {
             startScreen.classList.add('hidden');
             gameScreen.classList.remove('hidden');
@@ -447,7 +447,7 @@
             initializeGame();
         }
 
-        // Show start screen
+        
         function showStartScreen() {
             startScreen.classList.remove('hidden');
             gameScreen.classList.add('hidden');
@@ -455,7 +455,7 @@
             playerNameInput.value = '';
         }
 
-        // Show result screen
+        
         function showResultScreen() {
             gameScreen.classList.add('hidden');
             resultScreen.classList.remove('hidden');
@@ -467,14 +467,14 @@
             document.getElementById('finalScore').textContent = score;
         }
 
-        // Initialize game
+       
         function initializeGame() {
             resetGameState();
             createCards();
             startTimer();
         }
 
-        // Reset game state
+      
         function resetGameState() {
             flippedCards = [];
             matchedPairs = 0;
@@ -488,22 +488,21 @@
             }
         }
 
-        // Reset game (keep player name)
+       
         function resetGame() {
             memoryGrid.innerHTML = '';
             initializeGame();
         }
 
-        // Create cards
+        
         function createCards() {
             memoryGrid.innerHTML = '';
             
-            // Create pairs and shuffle
-            // Duplicate the four images to make 8 cards total and shuffle
+           
             const cardImages = [...images, ...images];
             shuffleArray(cardImages);
 
-            // Create card elements
+           
             cardImages.forEach((image, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -522,7 +521,7 @@
             });
         }
 
-        // Flip card
+       
         function flipCard(card) {
             if (!canFlip || card.classList.contains('flipped') || card.classList.contains('matched')) {
                 return;
@@ -539,14 +538,14 @@
             }
         }
 
-        // Check for match
+      
         function checkMatch() {
             const [card1, card2] = flippedCards;
             const imageId1 = card1.dataset.imageId;
             const imageId2 = card2.dataset.imageId;
 
             if (imageId1 === imageId2) {
-                // Match found
+               
                 setTimeout(() => {
                     card1.classList.add('matched');
                     card2.classList.add('matched');
@@ -554,13 +553,13 @@
                     flippedCards = [];
                     canFlip = true;
 
-                    // Check if game is complete
+                    
                     if (matchedPairs === images.length) {
                         endGame();
                     }
                 }, 500);
             } else {
-                // No match
+               
                 setTimeout(() => {
                     card1.classList.remove('flipped');
                     card2.classList.remove('flipped');
@@ -570,7 +569,7 @@
             }
         }
 
-        // Start timer
+        
         function startTimer() {
             timerInterval = setInterval(() => {
                 timer++;
@@ -578,7 +577,7 @@
             }, 1000);
         }
 
-        // End game
+      
         function endGame() {
             clearInterval(timerInterval);
             setTimeout(() => {
@@ -586,22 +585,21 @@
             }, 500);
         }
 
-        // Calculate score (lower is better - based on time and moves)
+        
         function calculateScore() {
-            // Perfect game: 16 moves in minimal time
-            // Score = 10000 - (moves * 100) - (timer * 10)
+           )
             const score = Math.max(0, 10000 - (moves * 100) - (timer * 10));
             return Math.round(score);
         }
 
-        // Format time as MM:SS
+        
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
             const secs = seconds % 60;
             return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
         }
 
-        // Shuffle array (Fisher-Yates algorithm)
+       
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -611,6 +609,7 @@
     </script>
 </body>
 </html>
+
 
 
 
